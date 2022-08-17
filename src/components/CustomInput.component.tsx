@@ -1,5 +1,5 @@
-import { Container, TextField, Typography } from "@mui/material"
-import { DeepRequired, FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
+import { Container, TextField, Typography } from "@mui/material";
+import { useFormContext } from "react-hook-form";
 
 const formValidation = (errors: any, errorKey: string): JSX.Element => {
     return errors[errorKey] ? (
@@ -13,15 +13,16 @@ interface Props {
     label: string;
     name: string;
     type: "text" | "password";
-    register: UseFormRegister<FieldValues>;
     placeholder?: string;
-    errors: FieldErrorsImpl<DeepRequired<FieldValues>>,
     disabled?: boolean;
 }
 
 const CustomInput = (props: Props): JSX.Element => {
 
-    const { label, type, register, errors, name, placeholder = '', disabled = false } = props;
+    const { label, type, name, placeholder = '', disabled = false } = props;
+
+    //@ts-ignore
+    const { register, errors } = useFormContext();
 
     return (
         <Container fixed>
@@ -30,7 +31,7 @@ const CustomInput = (props: Props): JSX.Element => {
                 label={label}
                 type={type}
                 //@ts-ignore
-                errors={errors[name]}
+                errors={errors && errors[name]}
                 placeholder={placeholder}
                 variant="outlined"
                 required

@@ -1,10 +1,9 @@
-import { ServerUser, serverUserEmpty } from "@/models";
 import { Box } from "@mui/material";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { EmailInput, PasswordInput } from "./components";
-import * as yup from "yup";
+import CustomButton from "@/components/CustomButton.component";
 import { yupResolver } from '@hookform/resolvers/yup';
+import loginValidation from './validations/Login.validation'
 
 const styles = {
     container: {
@@ -31,28 +30,6 @@ const styles = {
     }
 }
 
-// TODO: Move to validation schema
-const schema = yup
-    .object({
-        email: yup
-            .string()
-            .required('Email is required')
-            .min(3, 'Email must be greater than 2 characters')
-            .matches(
-                /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                'Email is invalid, please enter a valid email'
-            ),
-        password: yup
-            .string()
-            .required('Password is required')
-            .max(12, 'Password must be at least 6 characters')
-            .matches(
-                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                'Password must be alphanumeric, contains min 1 uppercase letter, 1 special character and have at least 6 characters.'
-            )
-    })
-    .required();
-
 export const LoginView = () => {
 
     const {
@@ -61,19 +38,28 @@ export const LoginView = () => {
         formState: { errors, isDirty, isValid },
         reset
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(loginValidation),
         mode: 'all'
     });
 
+
+    const onSubmit = async (data: any) => {
+        const result = await Promise.resolve(data);
+        console.log(result);
+        reset();
+    };
+
     return (
         <Box sx={styles.container}>
-            <form>
-                <Box sx={styles.formContainer}>
-                    <EmailInput register={register} errors={errors} />
-                    <PasswordInput register={register} errors={errors} />
-                    <button>{"sign in"}</button>
-                </Box>
-            </form>
+            <FormProvider  {...{ register, errors } as any}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Box sx={styles.formContainer}>
+                        <EmailInput />
+                        <PasswordInput />
+                        <CustomButton isDirty={isDirty} isValid={isValid} type="submit" children="Login" />
+                    </Box>
+                </form>
+            </FormProvider>
         </Box >
     )
 }
