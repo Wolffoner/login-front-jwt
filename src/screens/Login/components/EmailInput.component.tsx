@@ -1,8 +1,9 @@
 import CustomInput from "@/components/CustomInput.component";
+import { DeepRequired, FieldErrorsImpl, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface Props {
-    register?: any,
-    errors?: any,
+    register: UseFormRegister<FieldValues>,
+    errors: FieldErrorsImpl<DeepRequired<FieldValues>>,
 }
 
 export const EmailInput = (props: Props) => {
@@ -15,7 +16,8 @@ export const EmailInput = (props: Props) => {
             label={"Email"}
             name={"email"}
             type={"text"}
-            value={""}
-            onChange={(e) => { }} />
+            register={register}
+            errors={errors}
+        />
     );
 }

@@ -1,2 +1,2 @@
-export * from './EmailInput';
-export * from './PasswordInput';
+export * from './EmailInput.component';
+export * from './PasswordInput.component';
