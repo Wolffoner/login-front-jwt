@@ -1,6 +1,6 @@
-import { LoggedUserEmpty } from "@/models/LoggedUser.types";
+import { LoggedUser, loggedUserEmpty } from "@/models";
 import { createContext } from "react";
 
-const LoginContext = createContext(LoggedUserEmpty);
+const LoginContext = createContext({ loggedUser: loggedUserEmpty, handleLogin: (user: LoggedUser) => { } });
 
 export default LoginContext;

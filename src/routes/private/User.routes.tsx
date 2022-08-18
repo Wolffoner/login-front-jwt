@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 export const UserPrivateRoutes = () => {
     return (
         <Routes>
-            <Route path="/home" element={<UserInformation />} />
+            <Route path="/user-info" element={<UserInformation />} />
         </Routes>
     );
 }

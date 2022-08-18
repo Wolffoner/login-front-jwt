@@ -5,7 +5,7 @@ export interface LoggedUser {
     token: string;
 }
 
-export const LoggedUserEmpty: LoggedUser = {
+export const loggedUserEmpty: LoggedUser = {
     user: clientUserEmpty,
     token: ''
 }

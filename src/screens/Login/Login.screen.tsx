@@ -1,9 +1,13 @@
-import { Box } from "@mui/material";
-import { FieldValues, FormProvider, useForm } from "react-hook-form";
-import { EmailInput, PasswordInput } from "./components";
 import CustomButton from "@/components/CustomButton.component";
+import LoginContext from "@/context/Login.context";
+import { UserPrivateRoutes } from "@/routes";
 import { yupResolver } from '@hookform/resolvers/yup';
-import loginValidation from './validations/Login.validation'
+import { Box } from "@mui/material";
+import { useContext } from "react";
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { EmailInput, PasswordInput } from "./components";
+import loginValidation from './validations/Login.validation';
 
 const styles = {
     container: {
@@ -32,6 +36,9 @@ const styles = {
 
 export const LoginView = () => {
 
+    const navigate = useNavigate();
+    const { handleLogin } = useContext(LoginContext);
+
     const {
         register,
         handleSubmit,
@@ -43,9 +50,11 @@ export const LoginView = () => {
     });
 
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: FieldValues) => {
         const result = await Promise.resolve(data);
+        handleLogin({ user: { email: data.email }, token: 'token' });
         console.log(result);
+        navigate(UserPrivateRoutes.USER_INFO);
         reset();
     };
 
