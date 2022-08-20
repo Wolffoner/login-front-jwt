@@ -1,6 +1,5 @@
 import LoginContext from '@/context/Login.context';
 import { LoggedUser, loggedUserEmpty } from '@/models/LoggedUser.types';
-import { UserPrivateRoutes } from '@/routes/private/User.routes';
 import { UserPublicRoutes } from '@/routes/public/User.routes';
 import { Box } from '@mui/material';
 import { useState } from 'react';
@@ -15,14 +14,13 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
-      <LoginContext.Provider value={{ loggedUser, handleLogin }}>
-        <Box sx={{ display: 'flex', height: '100vh', flexDirection: 'column', width: '100vw' }} >
+    <LoginContext.Provider value={{ loggedUser, handleLogin }}>
+      <Box sx={{ display: 'flex', height: '100vh', flexDirection: 'column', width: '100vw' }} >
+        <BrowserRouter>
           <UserPublicRoutes />
-          <UserPrivateRoutes />
-        </Box>
-      </LoginContext.Provider>
-    </BrowserRouter >
+        </BrowserRouter>
+      </Box>
+    </LoginContext.Provider>
   )
 }
 
