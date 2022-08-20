@@ -1,7 +1,7 @@
-export enum UserPublicRoutes {
+export enum PublicRoutes {
     LOGIN = '/login',
 }
 
-export enum UserPrivateRoutes {
+export enum PrivateRoutes {
     USER_INFO = '/user-info',
 }
