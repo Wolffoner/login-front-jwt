@@ -12,4 +12,4 @@ Login implementation with JWT.
 ## How to run
 
 - `yarn install` or `npm install`
-- `yarn dev` or `npm dev`
+- `yarn vite dev` or `npm vite dev`
