@@ -13,11 +13,11 @@ const loginValidation = yup
         password: yup
             .string()
             .required('Password is required')
-            .max(12, 'Password must be at least 6 characters')
-            .matches(
-                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                'Password must be alphanumeric, contains min 1 uppercase letter, 1 special character and have at least 6 characters.'
-            )
+            .min(6, 'Password must be at least 6 characters')
+        // .matches(
+        //     /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        //     'Password must be alphanumeric, contains min 1 uppercase letter, 1 special character and have at least 6 characters.'
+        // )
     })
     .required();
 

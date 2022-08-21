@@ -1,6 +1,8 @@
 import CustomButton from "@/components/CustomButton.component";
 import LoginContext from "@/context/Login.context";
-import { UserPrivateRoutes } from "@/routes";
+import { ServerUser } from "@/models";
+import { PrivateRoutes } from "@/routes/enums/UserRoutes.enum";
+import authService from "@/services/auth.service";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from "@mui/material";
 import { useContext } from "react";
@@ -34,7 +36,7 @@ const styles = {
     }
 }
 
-export const LoginView = () => {
+const LoginView = () => {
 
     const navigate = useNavigate();
     const { handleLogin } = useContext(LoginContext);
@@ -51,11 +53,17 @@ export const LoginView = () => {
 
 
     const onSubmit = async (data: FieldValues) => {
-        const result = await Promise.resolve(data);
-        handleLogin({ user: { email: data.email }, token: 'token' });
-        console.log(result);
-        navigate(UserPrivateRoutes.USER_INFO);
-        reset();
+        try {
+            const result = await authService.login(data as ServerUser);
+            //TODO: type result
+            //@ts-ignore
+            handleLogin({ token: result.data.jwt });
+            localStorage.setItem('token', result.data.jwt);
+            navigate(PrivateRoutes.USER_INFO);
+            reset();
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -72,3 +80,5 @@ export const LoginView = () => {
         </Box >
     )
 }
+
+export default LoginView;

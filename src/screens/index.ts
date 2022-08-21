@@ -1,2 +1,2 @@
-export * from './Login';
-export * from './UserInformation.screen';
+export * from './login';
+export * from './user-information';
