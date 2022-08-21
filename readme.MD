@@ -8,6 +8,7 @@ Login implementation with JWT.
 - Unacopled some logic from the component to get more atomic design.
 - Write tests && use TDD instead.
 - Type some anys and create Interface for API Response.
+- Add Documentation with TSDoc.
 - Send feedback if login is unsucessful.
 
 ## How to run
