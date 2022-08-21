@@ -7,7 +7,7 @@ Login implementation with JWT.
 - Guard Routes
 - Unacopled some logic from the component to get more atomic design.
 - Write tests && use TDD instead.
-
+- Type some anys and create Interface for API Response.
 
 ## How to run
 
