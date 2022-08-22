@@ -10,6 +10,7 @@ Login implementation with JWT.
 - Type some anys and create Interface for API Response.
 - Add Documentation with TSDoc.
 - Send feedback if login is unsucessful.
+- create custom hooks for data fetch, use SWR.
 
 ## How to run
 
